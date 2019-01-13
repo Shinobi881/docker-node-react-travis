@@ -1,0 +1,25 @@
+sudo: required
+services:
+  - docker
+
+berfore_install:
+  - docker build -t shinobi881/complex_test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run shinobi881/complex_test yarn test -- --coverage
+
+after_success:
+  # Build docker images
+  - docker build -t shinobi881/complex_client ./client
+  - docker build -t shinobi881/complex_nginx ./nginx
+  - docker build -t shinobi881/complex_server ./server
+  - docker build -t shinobi881/complex_worker ./worker
+  
+  # Login to docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Push built images to Dockerhub
+  - docker push shinobi881/complex_client
+  - docker push shinobi881/complex_nginx
+  - docker push shinobi881/complex_server
+  - docker push shinobi881/complex_worker
