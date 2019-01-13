@@ -1,9 +1,8 @@
-language: node_js
 sudo: required
 services:
   - docker
 
-berfore_install:
+before_install:
   - docker build -t shinobi881/complex_test -f ./client/Dockerfile.dev ./client
 
 scripts:
