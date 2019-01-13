@@ -1,0 +1,11 @@
+{
+  "name": "complex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Muhsin Abdul-Musawwir <moose.techguy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^1.18.9",
+    "redis": "^2.8.0"
+  }
+}
