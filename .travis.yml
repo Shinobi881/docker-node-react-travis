@@ -5,7 +5,7 @@ services:
 before_install:
   - docker build -t shinobi881/complex_test -f ./client/Dockerfile.dev ./client
 
-scripts:
+script:
   - docker run shinobi881/complex_test yarn test -- --coverage
 
 after_success:
