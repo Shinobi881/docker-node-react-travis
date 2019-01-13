@@ -1,3 +1,4 @@
+language: node
 sudo: required
 services:
   - docker
@@ -14,7 +15,7 @@ after_success:
   - docker build -t shinobi881/complex_nginx ./nginx
   - docker build -t shinobi881/complex_server ./server
   - docker build -t shinobi881/complex_worker ./worker
-  
+
   # Login to docker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
