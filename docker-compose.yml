@@ -3,9 +3,19 @@ version: '3.7'
 services:
   postgres:
     image: postgres:latest
+
   redis:
     image: redis:latest
-  server:
+  
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - 5002:80
+
+  api:
     build:
       dockerfile: Dockerfile.dev
       context: ./server
@@ -20,6 +30,7 @@ services:
       - PG_DATABASE=postgres
       - PG_PASSWORD=postgres_password
       - PG_PORT=5432
+
   client:
     build:
       dockerfile: Dockerfile.dev
@@ -28,6 +39,7 @@ services:
       - /app/node_modules
       - ./client:/app
     ports:
+      - 3000:3000
 
   worker:
     build:
